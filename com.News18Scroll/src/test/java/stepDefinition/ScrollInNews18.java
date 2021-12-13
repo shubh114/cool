@@ -14,6 +14,7 @@ import utility.WebdriverUtility;
 public class ScrollInNews18 {
 	public WebDriver driver;
 	ExcelUtility eu=new ExcelUtility();
+	Homepage hp=new Homepage(driver);
 	@Given("^open browser$")
 	public void open_browser() throws Throwable {
 
@@ -45,17 +46,38 @@ public class ScrollInNews18 {
 			}
 	}
 
-	@Then("^Scroll Down till last and find last section in English Homepage$")
+	@When("^Scroll Down till last and find last section in English Homepage$")
 	public void scroll_Down_till_last_and_find_last_section_in_English_Homepage() throws Throwable {
-		Homepage hp=new Homepage(driver);
+//		Homepage hp=new Homepage(driver);
 		System.out.println("scroll");
 		//WebdriverUtility.waitForElementVisibility(driver,hp.getEnglishFooter());
-		Thread.sleep(120000);
-		WebdriverUtility.scrollToLast(driver);
-		//WebdriverUtility.waitForElementVisibility(driver,hp.getEnglishFooter());
-		
+		WebdriverUtility.scroll(driver);
+		WebdriverUtility.continuousScroll(driver,hp.getEnglishFooter());
+       WebdriverUtility.mouseOver(driver, hp.getPromotedContent());		
+       String text=hp.getPromotedContent().getText();
+       System.out.println(text);
 		
 	}
 
+	@When("^Scroll up and change to hindi language$")
+	public void scroll_up_and_change_to_hindi_language() throws Throwable {
+		WebdriverUtility.scrollToP(driver, 0, 0);
+		WebdriverUtility.mouseOver(driver, null);
+	}
+
+	@When("^Scroll to half select one section$")
+	public void scroll_to_half_select_one_section() throws Throwable {
+
+	}
+
+	@When("^CLick on (\\d+)th link on that section$")
+	public void click_on_th_link_on_that_section(int arg1) throws Throwable {
+
+	}
+
+	@Then("^Scroll down print all element present in footer$")
+	public void scroll_down_print_all_element_present_in_footer() throws Throwable {
+
+	}
 
 }

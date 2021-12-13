@@ -12,8 +12,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-//import pomRepository.Homepage;
-
 
 public class WebdriverUtility {
 	/**
@@ -29,9 +27,10 @@ public class WebdriverUtility {
 	 * @param driver
 	 * @param element
 	 */
-	public static void waitForElementVisibility(WebDriver driver, WebElement element) {
+	public static boolean waitForElementVisibility(WebDriver driver, WebElement element) {
 		WebDriverWait  wait=new WebDriverWait(driver, 100);
 		wait.until(ExpectedConditions.visibilityOf(element));
+		return true;
 	}
 	/**
 	 * this method wait for the element to be clicked
@@ -66,7 +65,7 @@ public class WebdriverUtility {
 	 * @param element
 	 * @param index
 	 */
-	public void selectOption(WebElement element,int index) {
+	public static void  selectOption(WebElement element,int index) {
 		Select select=new Select(element);
 		select.selectByIndex(index);
 	}
@@ -75,7 +74,7 @@ public class WebdriverUtility {
 	 * @param driver
 	 * @param element
 	 */
-	public void mouseOver(WebDriver driver,WebElement element) {
+	public static void mouseOver(WebDriver driver,WebElement element) {
 		Actions act=new Actions(driver);
 		act.moveToElement(element).perform();
 	}
@@ -136,7 +135,7 @@ public class WebdriverUtility {
 		js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
 	}
 	
-	public static void scrollDown(WebDriver driver, int x, int y) {
+	public static void scrollToP(WebDriver driver, int x, int y) {
 		JavascriptExecutor js = (JavascriptExecutor)  driver;
 		js.executeScript("window.scrollBy(" + x + "," + y + ")");
 	}
@@ -144,7 +143,7 @@ public class WebdriverUtility {
 	public static void scroll(WebDriver driver) {
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("window.scrollBy(0,400)");
+		js.executeScript("window.scrollBy(0,300)");
 	}
 	
 	public static void scrollLittle(WebDriver driver) {
@@ -173,17 +172,18 @@ public class WebdriverUtility {
 		}
 	}
 	
-//	public static void continuousScroll(WebDriver driver) {
-//		Homepage hp=new Homepage(driver);
-//		long end = System.currentTimeMillis() + 180000;
-//		while (!(WebdriverUtility.waitForElementVisibility(driver, hp.getEnglishFooter()))) {
-//			if (System.currentTimeMillis() < end) {
-//				WebdriverUtility.scrollUP(driver);
-//				WebdriverUtility.delay(1000);
-//			} else {
-//				break;
-//			}
-//		}
-//	}
+	public static void continuousScroll(WebDriver driver, WebElement element) {
+	//	Homepage hp=new Homepage(driver);
+		long end = System.currentTimeMillis() + 180000;
+		System.out.println(end);
+		while (WebdriverUtility.waitForElementVisibility(driver, element)) {
+			if (System.currentTimeMillis() < end) {
+				WebdriverUtility.scroll(driver);
+				WebdriverUtility.delay(1000);
+			} else {
+				break;
+			}
+		}
+	}
 	
 }

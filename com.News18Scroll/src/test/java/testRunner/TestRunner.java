@@ -8,7 +8,7 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 		features="classpath:features" ,
 		glue="stepDefinition",
 
-tags = {"@OpenBrowser"}, monochrome = true)
+tags = {"@tag"}, monochrome = true)
 public class TestRunner extends AbstractTestNGCucumberTests {
 
 }

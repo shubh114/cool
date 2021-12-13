@@ -18,6 +18,22 @@ public class Homepage extends WebdriverUtility {
 	
 	@FindBy(xpath="//section[@class='bottom_footer']")
 	private WebElement EnglishFooter;
+	
+	@FindBy(xpath="//div[@class='linner']")
+	private WebElement ChangeLanguage;
+	
+	@FindBy(xpath="//div[@class='linner']//a[contains(@href,'hindi')]")
+	private WebElement HindiLanguage;
+	
+	
+	public WebElement getChangeLanguage() {
+		return ChangeLanguage;
+	}
+
+	public WebElement getHindiLanguage() {
+		return HindiLanguage;
+	}
+
 	public WebElement getPromotedContent() {
 		return PromotedContent;
 	}
